@@ -1,0 +1,118 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero" id="hero-section">
+    <div class="hero-content">
+        <div class="hero-text">
+            {% if mode == 'cat' %}
+            <span class="hero-badge">🐱 Cat Mode Active</span>
+            <h1>Find Your Purrfect <span class="gradient-text">Companion</span></h1>
+            <p class="hero-subtitle">Every cat deserves a warm lap and a loving home. Explore our adorable feline friends waiting to be part of your family.</p>
+            {% else %}
+            <span class="hero-badge">🐶 Dog Mode Active</span>
+            <h1>Find Your Loyal <span class="gradient-text">Best Friend</span></h1>
+            <p class="hero-subtitle">Every dog deserves tail-wagging joy and unconditional love. Discover our wonderful canine companions ready for adoption.</p>
+            {% endif %}
+            <div class="hero-buttons">
+                <a href="{% url 'adoption' %}" class="btn btn-primary" id="hero-adopt-btn">Adopt Now</a>
+                <a href="{% url 'donation' %}" class="btn btn-outline" id="hero-donate-btn">Donate</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            {% if mode == 'cat' %}
+            <div class="hero-emoji-display">🐱</div>
+            {% else %}
+            <div class="hero-emoji-display">🐶</div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section" id="features-section">
+    <div class="section-container">
+        <h2 class="section-title">How You Can Help</h2>
+        <p class="section-subtitle">Making a difference in the lives of animals is easier than you think</p>
+        <div class="features-grid">
+            <div class="feature-card" id="feature-adopt">
+                <div class="feature-icon">🏠</div>
+                <h3>Adopt a Pet</h3>
+                <p>Give a loving home to a {% if mode == 'cat' %}cat{% else %}dog{% endif %} in need. Browse our available pets and find your perfect match.</p>
+                <a href="{% url 'adoption' %}" class="feature-link">View Pets →</a>
+            </div>
+            <div class="feature-card" id="feature-donate">
+                <div class="feature-icon">💝</div>
+                <h3>Make a Donation</h3>
+                <p>Your generous contribution helps us provide food, shelter, and medical care to rescued animals.</p>
+                <a href="{% url 'donation' %}" class="feature-link">Donate Now →</a>
+            </div>
+            <div class="feature-card" id="feature-share">
+                <div class="feature-icon">📢</div>
+                <h3>Spread Awareness</h3>
+                <p>Learn why adoption matters and share the word. Every voice counts in the fight for animal welfare.</p>
+                <a href="{% url 'awareness' %}" class="feature-link">Learn More →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Pets Section -->
+{% if featured_pets %}
+<section class="featured-pets-section" id="featured-pets">
+    <div class="section-container">
+        <h2 class="section-title">Meet Our {% if mode == 'cat' %}Cats{% else %}Dogs{% endif %}</h2>
+        <p class="section-subtitle">These adorable companions are waiting for their forever homes</p>
+        <div class="pets-grid">
+            {% for pet in featured_pets %}
+            <div class="pet-card" id="pet-card-{{ pet.id }}">
+                <div class="pet-card-image">
+                    {% if pet.image %}
+                    <img src="{{ pet.image.url }}" alt="{{ pet.name }}">
+                    {% else %}
+                    <div class="pet-placeholder">{% if mode == 'cat' %}🐱{% else %}🐶{% endif %}</div>
+                    {% endif %}
+                </div>
+                <div class="pet-card-info">
+                    <h3>{{ pet.name }}</h3>
+                    <p class="pet-breed">{{ pet.breed }}</p>
+                    <p class="pet-age">{{ pet.age }}</p>
+                    <a href="{% url 'pet_detail' pet.pk %}" class="btn btn-small">Meet {{ pet.name }}</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="section-cta">
+            <a href="{% url 'adoption' %}" class="btn btn-primary">View All {% if mode == 'cat' %}Cats{% else %}Dogs{% endif %}</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Stats Section -->
+<section class="stats-section" id="stats-section">
+    <div class="section-container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Pets Adopted</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Animals Rescued</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">Volunteers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Partner Shelters</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

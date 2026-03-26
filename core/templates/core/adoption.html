@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Adopt a {% if mode == 'cat' %}Cat{% else %}Dog{% endif %}{% endblock %}
+
+{% block content %}
+<section class="page-header" id="adoption-header">
+    <div class="section-container">
+        <h1>{% if mode == 'cat' %}🐱 Cats{% else %}🐶 Dogs{% endif %} Available for Adoption</h1>
+        <p>Browse our lovely {% if mode == 'cat' %}feline{% else %}canine{% endif %} friends and find your perfect companion</p>
+    </div>
+</section>
+
+<section class="adoption-section" id="adoption-listing">
+    <div class="section-container">
+        {% if pets %}
+        <div class="pets-grid">
+            {% for pet in pets %}
+            <div class="pet-card" id="adopt-card-{{ pet.id }}">
+                <div class="pet-card-image">
+                    {% if pet.image %}
+                    <img src="{{ pet.image.url }}" alt="{{ pet.name }}" loading="lazy">
+                    {% else %}
+                    <div class="pet-placeholder">{% if mode == 'cat' %}🐱{% else %}🐶{% endif %}</div>
+                    {% endif %}
+                    <span class="pet-badge">Available</span>
+                </div>
+                <div class="pet-card-info">
+                    <h3>{{ pet.name }}</h3>
+                    <div class="pet-meta">
+                        <span class="pet-breed">{{ pet.breed }}</span>
+                        <span class="pet-divider">•</span>
+                        <span class="pet-age">{{ pet.age }}</span>
+                        <span class="pet-divider">•</span>
+                        <span class="pet-gender">{{ pet.get_gender_display }}</span>
+                    </div>
+                    <p class="pet-desc">{{ pet.description|truncatewords:20 }}</p>
+                    <a href="{% url 'pet_detail' pet.pk %}" class="btn btn-primary btn-small" id="adopt-btn-{{ pet.id }}">Learn More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state" id="no-pets">
+            <div class="empty-icon">{% if mode == 'cat' %}😿{% else %}🐕{% endif %}</div>
+            <h3>No {% if mode == 'cat' %}cats{% else %}dogs{% endif %} available right now</h3>
+            <p>Check back soon! New pets are added regularly.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

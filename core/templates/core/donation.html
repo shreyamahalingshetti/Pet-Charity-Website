@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Donate{% endblock %}
+
+{% block content %}
+<section class="page-header" id="donation-header">
+    <div class="section-container">
+        <h1>💝 Support Our Mission</h1>
+        <p>Your donation helps us rescue, feed, and care for animals in need</p>
+    </div>
+</section>
+
+<section class="donation-section" id="donation-content">
+    <div class="section-container">
+        <div class="donation-grid">
+            <div class="donation-info">
+                <h2>Where Your Money Goes</h2>
+                <div class="donation-breakdown">
+                    <div class="breakdown-item">
+                        <div class="breakdown-icon">🍲</div>
+                        <div>
+                            <h4>Food & Nutrition</h4>
+                            <p>Providing nutritious meals to rescued {% if mode == 'cat' %}cats{% else %}dogs{% endif %}</p>
+                        </div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-icon">🏥</div>
+                        <div>
+                            <h4>Medical Care</h4>
+                            <p>Vaccinations, spay/neuter surgeries, and emergency treatments</p>
+                        </div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-icon">🏠</div>
+                        <div>
+                            <h4>Shelter & Housing</h4>
+                            <p>Safe, clean, and comfortable shelters for all our rescues</p>
+                        </div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-icon">📋</div>
+                        <div>
+                            <h4>Adoption Programs</h4>
+                            <p>Running adoption drives and awareness campaigns</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="donation-form-container">
+                <h2>Make a Donation</h2>
+                <form method="post" class="styled-form" id="donation-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" name="name" id="name" required placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" name="email" id="email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Donation Amount (₹)</label>
+                        <input type="number" name="amount" id="amount" required placeholder="500" min="1" step="1">
+                    </div>
+                    <div class="quick-amounts">
+                        <button type="button" class="quick-amt-btn" onclick="document.getElementById('amount').value=100">₹100</button>
+                        <button type="button" class="quick-amt-btn" onclick="document.getElementById('amount').value=500">₹500</button>
+                        <button type="button" class="quick-amt-btn" onclick="document.getElementById('amount').value=1000">₹1,000</button>
+                        <button type="button" class="quick-amt-btn" onclick="document.getElementById('amount').value=5000">₹5,000</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message (Optional)</label>
+                        <textarea name="message" id="message" rows="3" placeholder="Leave a kind message..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" id="submit-donation">Donate Now 💝</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

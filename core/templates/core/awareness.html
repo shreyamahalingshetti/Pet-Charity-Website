@@ -1,0 +1,118 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Why Adopt a {% if mode == 'cat' %}Cat{% else %}Dog{% endif %}{% endblock %}
+
+{% block content %}
+<section class="page-header" id="awareness-header">
+    <div class="section-container">
+        <h1>Why Adopt a {% if mode == 'cat' %}Cat 🐱{% else %}Dog 🐶{% endif %}?</h1>
+        <p>Discover the amazing benefits of pet adoption and how you can make a difference</p>
+    </div>
+</section>
+
+<section class="awareness-section" id="awareness-content">
+    <div class="section-container">
+
+        {% if mode == 'cat' %}
+        <!-- Cat Awareness Content -->
+        <div class="awareness-grid">
+            <div class="awareness-card" id="aware-1">
+                <div class="awareness-icon">💕</div>
+                <h3>Unconditional Companionship</h3>
+                <p>Cats form deep bonds with their owners. Their gentle purring is scientifically proven to reduce stress, lower blood pressure, and promote healing. A cat's companionship can significantly improve your mental health.</p>
+            </div>
+            <div class="awareness-card" id="aware-2">
+                <div class="awareness-icon">🏡</div>
+                <h3>Perfect for Any Home</h3>
+                <p>Whether you live in a studio apartment or a spacious house, cats adapt beautifully. They're independent, quiet, and clean — making them ideal pets for any living situation.</p>
+            </div>
+            <div class="awareness-card" id="aware-3">
+                <div class="awareness-icon">🩺</div>
+                <h3>Health Benefits</h3>
+                <p>Cat owners have a 30% lower risk of heart attacks. The calming presence of a cat reduces anxiety and provides emotional support. Purring vibrations even promote bone density!</p>
+            </div>
+            <div class="awareness-card" id="aware-4">
+                <div class="awareness-icon">🌍</div>
+                <h3>Save a Life</h3>
+                <p>Millions of cats end up in shelters every year. By adopting, you give a deserving cat a second chance at life and free up shelter space for other animals in need.</p>
+            </div>
+            <div class="awareness-card" id="aware-5">
+                <div class="awareness-icon">🎉</div>
+                <h3>Endless Entertainment</h3>
+                <p>Cats are natural comedians! Their playful antics, curious nature, and unique personalities will keep you entertained for hours. Every cat has a distinct character you'll fall in love with.</p>
+            </div>
+            <div class="awareness-card" id="aware-6">
+                <div class="awareness-icon">🌙</div>
+                <h3>Low Maintenance Friends</h3>
+                <p>Cats are self-grooming, litter-trained, and don't need daily walks. They're the perfect pet for busy professionals who still want the joy of animal companionship.</p>
+            </div>
+        </div>
+
+        <div class="fun-facts" id="fun-facts">
+            <h2>🐱 Fun Cat Facts</h2>
+            <div class="facts-grid">
+                <div class="fact-item">Cats spend about 70% of their lives sleeping — they dream just like us!</div>
+                <div class="fact-item">A group of cats is called a "clowder" — how adorable is that?</div>
+                <div class="fact-item">Cats have over 20 different vocalizations, including the special meow they use only for humans.</div>
+                <div class="fact-item">Ancient Egyptians worshipped cats and considered them sacred animals.</div>
+            </div>
+        </div>
+
+        {% else %}
+        <!-- Dog Awareness Content -->
+        <div class="awareness-grid">
+            <div class="awareness-card" id="aware-1">
+                <div class="awareness-icon">🤗</div>
+                <h3>Loyal Best Friend</h3>
+                <p>Dogs are famously loyal companions. They greet you with unconditional love every single day. A dog's devotion and friendship is truly unmatched in the animal kingdom.</p>
+            </div>
+            <div class="awareness-card" id="aware-2">
+                <div class="awareness-icon">🏃</div>
+                <h3>Active Lifestyle Partner</h3>
+                <p>Dogs encourage an active lifestyle! Daily walks, runs, and outdoor adventures with your dog improve cardiovascular health, boost mood, and help you stay fit.</p>
+            </div>
+            <div class="awareness-card" id="aware-3">
+                <div class="awareness-icon">🧠</div>
+                <h3>Mental Health Support</h3>
+                <p>Dogs are incredible emotional support animals. They reduce anxiety, combat loneliness, and provide a sense of purpose. Studies show dog owners report higher levels of happiness.</p>
+            </div>
+            <div class="awareness-card" id="aware-4">
+                <div class="awareness-icon">👨‍👩‍👧</div>
+                <h3>Great for Families</h3>
+                <p>Dogs teach children responsibility, empathy, and compassion. They become protective family members and create lasting memories. Growing up with a dog builds character.</p>
+            </div>
+            <div class="awareness-card" id="aware-5">
+                <div class="awareness-icon">🏠</div>
+                <h3>Home Security</h3>
+                <p>Dogs are natural protectors. Their keen senses alert you to visitors and unusual activity, providing an extra layer of security for your home and family.</p>
+            </div>
+            <div class="awareness-card" id="aware-6">
+                <div class="awareness-icon">🌟</div>
+                <h3>Give Them a Second Chance</h3>
+                <p>Countless dogs are waiting in shelters for a loving family. By adopting, you not only gain a best friend but also save a life. Every adoption makes room for another rescue.</p>
+            </div>
+        </div>
+
+        <div class="fun-facts" id="fun-facts">
+            <h2>🐶 Fun Dog Facts</h2>
+            <div class="facts-grid">
+                <div class="fact-item">Dogs can understand up to 250 words and gestures — they're true communicators!</div>
+                <div class="fact-item">A dog's nose print is unique, just like a human fingerprint.</div>
+                <div class="fact-item">Dogs dream during sleep and often "run" in their dreams — watch those paws twitch!</div>
+                <div class="fact-item">Petting a dog releases oxytocin (the love hormone) in both the dog and the human.</div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="awareness-cta">
+            <h2>Ready to Make a Difference?</h2>
+            <p>Every adoption creates a ripple of positive change. Start your journey today.</p>
+            <div class="hero-buttons">
+                <a href="{% url 'adoption' %}" class="btn btn-primary" id="awareness-adopt-btn">Browse {% if mode == 'cat' %}Cats{% else %}Dogs{% endif %}</a>
+                <a href="{% url 'donation' %}" class="btn btn-outline" id="awareness-donate-btn">Support Our Mission</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

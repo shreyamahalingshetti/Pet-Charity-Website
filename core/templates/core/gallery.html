@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Gallery{% endblock %}
+
+{% block content %}
+<section class="page-header" id="gallery-header">
+    <div class="section-container">
+        <h1>{% if mode == 'cat' %}🐱 Cat Gallery{% else %}🐶 Dog Gallery{% endif %}</h1>
+        <p>A heartwarming collection of our adorable {% if mode == 'cat' %}feline{% else %}canine{% endif %} friends</p>
+    </div>
+</section>
+
+<section class="gallery-section" id="gallery-content">
+    <div class="section-container">
+        {% if pets %}
+        <div class="gallery-grid">
+            {% for pet in pets %}
+            <div class="gallery-item" id="gallery-{{ pet.id }}">
+                {% if pet.image %}
+                <img src="{{ pet.image.url }}" alt="{{ pet.name }}" loading="lazy">
+                {% else %}
+                <div class="gallery-placeholder">{% if mode == 'cat' %}🐱{% else %}🐶{% endif %}</div>
+                {% endif %}
+                <div class="gallery-overlay">
+                    <h3>{{ pet.name }}</h3>
+                    <p>{{ pet.breed }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state" id="no-gallery">
+            <div class="empty-icon">📸</div>
+            <h3>Gallery coming soon!</h3>
+            <p>We're adding photos of our lovely {% if mode == 'cat' %}cats{% else %}dogs{% endif %}. Check back soon!</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

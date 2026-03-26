@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PawsOfHope{% endblock %} — Pet Charity</title>
+    <meta name="description" content="{% block meta_desc %}PawsOfHope — Adopt a pet, change a life. Supporting cat and dog adoption and welfare.{% endblock %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="{{ mode }}-mode" id="app-body">
+
+    <!-- Navigation -->
+    <nav class="navbar" id="main-nav">
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="nav-logo">
+                <span class="logo-icon">🐾</span>
+                <span class="logo-text">PawsOfHope</span>
+            </a>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
+                <li><a href="{% url 'adoption' %}" class="{% if request.resolver_match.url_name == 'adoption' %}active{% endif %}">Adopt</a></li>
+                <li><a href="{% url 'awareness' %}" class="{% if request.resolver_match.url_name == 'awareness' %}active{% endif %}">Why Adopt</a></li>
+                <li><a href="{% url 'gallery' %}" class="{% if request.resolver_match.url_name == 'gallery' %}active{% endif %}">Gallery</a></li>
+                <li><a href="{% url 'donation' %}" class="{% if request.resolver_match.url_name == 'donation' %}active{% endif %}">Donate</a></li>
+                <li><a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a></li>
+                <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+            </ul>
+
+            <!-- Mode Toggle -->
+            <div class="mode-toggle" id="mode-toggle">
+                <span class="mode-label cat-label" id="cat-label">🐱</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="mode-switch" {% if mode == 'dog' %}checked{% endif %}>
+                    <span class="toggle-slider"></span>
+                </label>
+                <span class="mode-label dog-label" id="dog-label">🐶</span>
+            </div>
+
+            <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" id="alert-msg">
+            {{ message }}
+            <button class="alert-close" onclick="this.parentElement.remove()">×</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><span class="logo-icon">🐾</span> PawsOfHope</h3>
+                    <p>Dedicated to finding loving homes for every pet. Together, we can make a difference.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'adoption' %}">Adopt a Pet</a></li>
+                        <li><a href="{% url 'donation' %}">Donate</a></li>
+                        <li><a href="{% url 'awareness' %}">Why Adopt</a></li>
+                        <li><a href="{% url 'gallery' %}">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get In Touch</h4>
+                    <ul>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-icon" aria-label="Facebook">📘</a>
+                        <a href="#" class="social-icon" aria-label="Instagram">📸</a>
+                        <a href="#" class="social-icon" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PawsOfHope. All rights reserved. Made with ❤️ for animals.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'core/js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
